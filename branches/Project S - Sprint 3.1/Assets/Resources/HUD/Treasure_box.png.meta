@@ -1,0 +1,554 @@
+fileFormatVersion: 2
+guid: fd75accd0da62624a919ed60f34ff7ec
+timeCreated: 1517819314
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Treasure_box_0
+    21300002: Treasure_box_1
+    21300004: Treasure_box_2
+    21300006: Treasure_box_3
+    21300008: Treasure_box_4
+    21300010: Treasure_box_5
+    21300012: Treasure_box_6
+    21300014: Treasure_box_7
+    21300016: Treasure_box_8
+    21300018: Treasure_box_10
+    21300020: Treasure_box_11
+    21300022: Treasure_box_12
+    21300024: Treasure_box_13
+    21300026: Treasure_box_14
+    21300028: Treasure_box_15
+    21300030: Treasure_box_16
+    21300032: Treasure_box_17
+    21300034: Treasure_box_18
+    21300036: Treasure_box_19
+    21300038: Treasure_box_20
+    21300040: Treasure_box_21
+    21300042: Treasure_box_22
+    21300044: Treasure_box_23
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Treasure_box_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 817
+        width: 266
+        height: 205
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 118, y: 66.5}
+        - {x: 86, y: 102.5}
+        - {x: -127, y: 102.5}
+        - {x: -133, y: 99.5}
+        - {x: -133, y: -5.5}
+        - {x: -100, y: -102.5}
+        - {x: 88, y: -102.5}
+        - {x: 133, y: -5.5}
+        - {x: 133, y: 56.5}
+        - {x: 126, y: 74.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_1
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 796
+        width: 251
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 109.5, y: 43}
+        - {x: 44.5, y: 54}
+        - {x: 32.5, y: 54}
+        - {x: 47.5, y: 54}
+        - {x: 59.5, y: 58}
+        - {x: 56.5, y: 80}
+        - {x: 46.5, y: 81}
+        - {x: 21.5, y: 112}
+        - {x: -23.5, y: 112}
+        - {x: -101.5, y: 50}
+        - {x: -125.5, y: -10}
+        - {x: -125.5, y: -62}
+        - {x: -90.5, y: -112}
+        - {x: 96.5, y: -112}
+        - {x: 125.5, y: -71}
+        - {x: 125.5, y: -2}
+      - - {x: -31.5, y: 55}
+        - {x: -35.5, y: 62}
+        - {x: -27.5, y: 60}
+        - {x: -24.5, y: 55}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_2
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 800
+        width: 237
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -55.5, y: 111}
+        - {x: -118.5, y: 91}
+        - {x: -118.5, y: -90}
+        - {x: -62.5, y: -111}
+        - {x: 58.5, y: -111}
+        - {x: 118.5, y: -13}
+        - {x: 118.5, y: 25}
+        - {x: 68.5, y: 111}
+      - - {x: 61.5, y: 2}
+        - {x: 62.5, y: -1}
+        - {x: 61.5, y: -2}
+        - {x: 62.5, y: -2}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_3
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 795
+        width: 233
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36.5, y: 114.5}
+        - {x: -116.5, y: 22.5}
+        - {x: -116.5, y: -45.5}
+        - {x: -88.5, y: -114.5}
+        - {x: 85.5, y: -114.5}
+        - {x: 116.5, y: -86.5}
+        - {x: 116.5, y: 54.5}
+        - {x: 41.5, y: 114.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_5
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 585
+        width: 239
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -92.5, y: 110}
+        - {x: -119.5, y: 85}
+        - {x: -119.5, y: -79}
+        - {x: -53.5, y: -110}
+        - {x: 53.5, y: -110}
+        - {x: 74.5, y: -103}
+        - {x: 119.5, y: -37}
+        - {x: 119.5, y: 78}
+        - {x: 59.5, y: 110}
+      - - {x: -118.5, y: -84}
+        - {x: -118.5, y: -86}
+        - {x: -115.5, y: -89}
+        - {x: -112.5, y: -88}
+        - {x: -112.5, y: -84}
+        - {x: -114.5, y: -82}
+        - {x: -116.5, y: -82}
+      - - {x: 49.5, y: -39}
+        - {x: 48.5, y: -36}
+        - {x: 48.5, y: -55}
+        - {x: 49.5, y: -55}
+      - - {x: 54.5, y: 47}
+        - {x: 53.5, y: 48}
+        - {x: 53.5, y: 52}
+        - {x: 52.5, y: 56}
+        - {x: 49.5, y: 58}
+        - {x: 55.5, y: 37}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_8
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 452
+        width: 164
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 71.5}
+        - {x: -82, y: 44.5}
+        - {x: -82, y: -16.5}
+        - {x: -67, y: -71.5}
+        - {x: 82, y: -71.5}
+        - {x: 82, y: 71.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_11
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 434
+        width: 166
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -74, y: 71.5}
+        - {x: -83, y: 53.5}
+        - {x: -83, y: -44.5}
+        - {x: -67, y: -71.5}
+        - {x: 83, y: -71.5}
+        - {x: 83, y: 71.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_12
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 450
+        width: 164
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -81, y: 71.5}
+        - {x: -82, y: 67.5}
+        - {x: -82, y: -48.5}
+        - {x: -68, y: -71.5}
+        - {x: 72, y: -71.5}
+        - {x: 82, y: -33.5}
+        - {x: 82, y: 70.5}
+        - {x: 77, y: 71.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_13
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 285
+        width: 166
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 68, y: 71.5}
+        - {x: -77, y: 71.5}
+        - {x: -83, y: 50.5}
+        - {x: -83, y: -39.5}
+        - {x: -68, y: -71.5}
+        - {x: 69, y: -71.5}
+        - {x: 83, y: -22.5}
+        - {x: 83, y: 40.5}
+        - {x: 82, y: 46.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_14
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 257
+        width: 153
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 62.5, y: 66}
+        - {x: -59.5, y: 66}
+        - {x: -76.5, y: 42}
+        - {x: -76.5, y: -16}
+        - {x: -66.5, y: -66}
+        - {x: 64.5, y: -66}
+        - {x: 73.5, y: -54}
+        - {x: 76.5, y: -19}
+        - {x: 76.5, y: 54}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_15
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 310
+        width: 153
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -60.5, y: -67}
+        - {x: -60.5, y: -69}
+        - {x: -53.5, y: -69}
+        - {x: -53.5, y: -67}
+        - {x: -55.5, y: -65}
+        - {x: -58.5, y: -65}
+      - - {x: -71.5, y: 69}
+        - {x: -76.5, y: 55}
+        - {x: -76.5, y: -51}
+        - {x: -71.5, y: -65}
+        - {x: 76.5, y: -65}
+        - {x: 76.5, y: 69}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_16
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 288
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2, y: 2}
+        - {x: -2, y: -2}
+        - {x: 2, y: -2}
+        - {x: 2, y: 2}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_17
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 156
+        width: 132
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 76}
+        - {x: -66, y: 64}
+        - {x: -66, y: -63}
+        - {x: -46, y: -76}
+        - {x: 48, y: -76}
+        - {x: 66, y: -70}
+        - {x: 66, y: 45}
+        - {x: 64, y: 55}
+        - {x: 54, y: 67}
+        - {x: 43, y: 76}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 114
+        width: 143
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 71.5, y: 82.5}
+        - {x: -68.5, y: 82.5}
+        - {x: -71.5, y: 81.5}
+        - {x: -71.5, y: -72.5}
+        - {x: -30.5, y: -82.5}
+        - {x: 71.5, y: -82.5}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_19
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 114
+        width: 142
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 83}
+        - {x: -71, y: 75}
+        - {x: -71, y: -70}
+        - {x: -41, y: -83}
+        - {x: 69, y: -83}
+        - {x: 71, y: -68}
+        - {x: 71, y: 79}
+        - {x: 67, y: 83}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_21
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 98
+        width: 132
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 76}
+        - {x: -66, y: 71}
+        - {x: -66, y: -73}
+        - {x: -27, y: -78}
+        - {x: 58, y: -78}
+        - {x: 66, y: -67}
+        - {x: 66, y: 61}
+        - {x: 54, y: 76}
+      - - {x: -55, y: 78}
+        - {x: -55, y: 76}
+        - {x: -53, y: 74}
+        - {x: -50, y: 74}
+        - {x: -48, y: 76}
+        - {x: -48, y: 78}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Treasure_box_23
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 98
+        width: 132
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 76}
+        - {x: -66, y: 64}
+        - {x: -66, y: -64}
+        - {x: -29, y: -76}
+        - {x: 65, y: -76}
+        - {x: 66, y: -70}
+        - {x: 66, y: 69}
+        - {x: 52, y: 76}
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

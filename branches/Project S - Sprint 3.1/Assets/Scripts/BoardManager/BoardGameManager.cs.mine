@@ -1,0 +1,538 @@
+﻿using Assets;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class BoardGameManager : Singleton<BoardGameManager>
+{
+    public SFXSounds sfxSounds;
+
+    public static int gridWidth = 10;
+    public static int gridHeight = 10;
+    public Transform container;
+    private float cellSize;
+    private GameObject[,] grid;
+    public GameObject block;
+    public bool isGameOver;
+
+    private List<GameObject> clearBlock = new List<GameObject>();
+    private List<GameObject> addedBlock = new List<GameObject>();
+
+    [Header("LIST OF SHAPES HOLDER")]
+    public List<GameObject> listShapeHolder;
+
+
+    public GameObject[,] Grid
+    {
+        get
+        {
+            return grid;
+        }
+
+        set
+        {
+            grid = value;
+        }
+    }
+
+    // Update is called once per frame
+
+
+
+    public IEnumerator Implementation_BoardAction()
+    {
+
+        List<int> listRowDelete = new List<int>();
+        List<int> listColDelete = new List<int>();
+
+        DebugUtil.debugYellow("GAME OVER TEST 01:" + isGameOver);
+
+        for (int x = 0; x < gridHeight; x++)
+        {
+            if (Check_IsCanDeleteRowAtIndex(x))
+            {
+                listRowDelete.Add(x);
+                MissionManager.Instance.CheckMission(TargetType.EatBlockLine, Line.Row);
+            }
+        }
+
+        for (int y = 0; y < gridWidth; y++)
+        {
+            if (Check_IsCanDeleteColumAtIndex(y))
+            {
+                listColDelete.Add(y);
+                MissionManager.Instance.CheckMission(TargetType.EatBlockLine, Line.Collum);
+            }
+        }
+
+
+        
+        clearBlock.Clear();
+        foreach (int rowIndex in listRowDelete)
+        {
+            Delete_RowAtIndex(rowIndex);
+        }
+
+        foreach (int colIndex in listColDelete)
+        {
+            Delete_ColumnAtindex(colIndex);
+        }
+
+        if (MissionManager.Instance.IsStep)
+        {
+            UIManager.Instance.Step -= 1;
+        }
+        if (listColDelete.Count == 0 && listRowDelete.Count == 0 && MissionManager.Instance.IsHaveGrass)
+        {
+            BoardGameManager.Instance.spreadGrass();
+        }
+        if (listColDelete.Count + listRowDelete.Count > 0)
+        {
+            sfxSounds.playClearBlockSFX();
+            if (listColDelete.Count + listRowDelete.Count > 1)
+                MissionManager.Instance.CheckMission(TargetType.EatCombo, listColDelete.Count + listRowDelete.Count);
+        }
+        
+
+        if (clearBlock.Count > 0)
+        {
+            UIManager.Instance.Score += (listColDelete.Count * 100 + listRowDelete.Count * 100) * (listRowDelete.Count + listColDelete.Count);
+            UIManager.Instance.ShowAddScoreText(clearBlock);
+        }
+        else
+        {
+            UIManager.Instance.Score += addedBlock.Count;
+            UIManager.Instance.ShowAddScoreText(addedBlock);
+        }
+
+        MissionManager.Instance.CheckMission(TargetType.Scored, (listColDelete.Count * 100 + listRowDelete.Count * 100) * (listRowDelete.Count + listColDelete.Count));
+
+        yield return new WaitForSeconds(0.5f);
+        isGameOver = Check_IsGameOver();
+        DebugUtil.debugGreen("GAME OVER TEST 02:" + isGameOver);
+
+        if (isGameOver)
+        {
+            UIManager.Instance.GameOver(true);
+        }
+        yield return null;
+    }
+    private void Awake()
+    {
+        //Create_Grid();
+    }
+
+    private void Start()
+    {
+        //Create_Grid();
+    }
+
+    #region CREATE BOARD GAME
+    public void Create_Grid()
+    {
+        Grid = new GameObject[gridWidth, gridHeight];
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                GameObject newBlock = GameObject.Instantiate(block, container);
+                Grid[x, y] = newBlock;
+                newBlock.GetComponent<Block>().ChangeType(BlockType.BLOCK_BOARD);
+                newBlock.GetComponent<Block>().index = new Vector2Int(x, y);
+                newBlock.layer = LayerMask.NameToLayer("BOARD_LAYER");
+                //newBlock.layer = LayerMask.NameToLayer("Board");
+            }
+        }
+    }
+    #endregion
+
+
+    //-------------------------------------------------------------------------------------------------------
+    #region DELETE BLOCK
+    public bool Check_IsCanDeleteRowAtIndex(int rowIndex)
+    {
+        for (int colIndex = 0; colIndex < gridWidth; colIndex++)
+        {
+            if (grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_BOARD
+                || grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_ROCK
+                || grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                return false;
+        }
+        return true;
+    }
+
+    public bool Check_IsCanDeleteColumAtIndex(int columnIndex)
+    {
+        for (int rowIndex = 0; rowIndex < gridHeight; rowIndex++)
+        {
+            if (grid[rowIndex, columnIndex].GetComponent<Block>().type == BlockType.BLOCK_BOARD
+                || grid[rowIndex, columnIndex].GetComponent<Block>().type == BlockType.BLOCK_ROCK
+                || grid[rowIndex, columnIndex].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                return false;
+        }
+        return true;
+    }
+
+    public void Delete_RowAtIndex(int rowIndex)
+    {
+        for (int colIndex = 0; colIndex < gridWidth; colIndex++)
+        {
+            if (!grid[rowIndex, colIndex].GetComponent<Block>().IsClearing)
+            {
+                CheckMissionAndDeleteLine(grid[rowIndex, colIndex].GetComponent<Block>());
+                try
+                {
+                    if (grid[rowIndex + 1, colIndex].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                    {
+                        if (!(grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_BLUE && grid[rowIndex + 1, colIndex].GetComponent<Block>().IceBreak != 0))
+                        {
+                            grid[rowIndex + 1, colIndex].GetComponent<Block>().ClearBlock();
+                            MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, BlockType.BLOCK_GRASS, 1);
+                        }
+                    }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+
+                }
+                try
+                {
+                    if (grid[rowIndex - 1, colIndex].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                    {
+                        if (!(grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_BLUE && grid[rowIndex + 1, colIndex].GetComponent<Block>().IceBreak != 0))
+                        {
+                            grid[rowIndex - 1, colIndex].GetComponent<Block>().ClearBlock();
+                            MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, BlockType.BLOCK_GRASS, 1);
+                        }
+                    }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+
+                }
+                clearBlock.Add(grid[rowIndex, colIndex]);
+            }
+            //Grid[rowIndex, colIndex].GetComponent<Block>().ChangeType(BlockType.BLOCK_BOARD);
+        }
+
+    }
+
+    public void Delete_ColumnAtindex(int colIndex)
+    {
+        for (int rowIndex = 0; rowIndex < gridHeight; rowIndex++)
+        {
+            if (!grid[rowIndex, colIndex].GetComponent<Block>().IsClearing)
+            {
+                CheckMissionAndDeleteLine(grid[rowIndex, colIndex].GetComponent<Block>());
+                try
+                {
+                    if (grid[rowIndex, colIndex + 1].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                    {
+                        if (!(grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_BLUE && grid[rowIndex + 1, colIndex].GetComponent<Block>().IceBreak != 0))
+                        {
+                            grid[rowIndex, colIndex + 1].GetComponent<Block>().ClearBlock();
+                            MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, BlockType.BLOCK_GRASS, 1);
+                        }
+                    }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+
+                }
+                try
+                {
+                    if (grid[rowIndex, colIndex - 1].GetComponent<Block>().type == BlockType.BLOCK_GRASS)
+                    {
+                        if (!(grid[rowIndex, colIndex].GetComponent<Block>().type == BlockType.BLOCK_BLUE && grid[rowIndex + 1, colIndex].GetComponent<Block>().IceBreak != 0))
+                        {
+                            grid[rowIndex, colIndex - 1].GetComponent<Block>().ClearBlock();
+                            MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, BlockType.BLOCK_GRASS, 1);
+                        }
+                    }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+
+                }
+                clearBlock.Add(grid[rowIndex, colIndex]);
+            }
+            // Grid[rowIndex, colIndex].GetComponent<Block>().ClearBlock();
+            //Grid[rowIndex, colIndex].GetComponent<Block>().ChangeType(BlockType.BLOCK_BOARD);
+
+        }
+    }
+    public void CheckMissionAndDeleteLine(Block block)
+    {
+        if (block.type != BlockType.BLOCK_BLUE)
+        {
+            block.ClearBlock();
+            MissionManager.Instance.CheckMission(TargetType.EatBlockColor, block.type, 1);
+        }
+        else
+        {
+            if (block.IceBreak == 0)
+            {
+                block.ClearBlock();
+                MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, block.type, 1);
+            }
+            else
+                block.UpdateIceBreak();
+        }
+
+    }
+    #endregion
+    //-------------------------------------------------------------------------------------------------------
+    #region ADD BLOCK TO BORD
+    public void Add_BlockToBoard(int x, int y, BlockType typeOfBlock)
+    {        
+        if (typeOfBlock != BlockType.EMPTY)
+        {
+            if (Check_IsValidBlock(x, y))
+            {
+                grid[x, y].GetComponent<Block>().ChangeType(typeOfBlock);
+            }
+        }
+
+    }
+
+    public void Add_ShapeToBoard(int startX, int startY, GameObject shape)
+    {
+        sfxSounds.playPlaceBlockSFX();
+        addedBlock.Clear();
+        for (int x = 0; x < 4; x++)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                int rowIndex = startX + x;
+                int colIndex = startY + y;
+
+                BlockType typeOfShape = shape.GetComponent<BlockShape>().blocks[x, y].GetComponent<Block>().type;
+                if (typeOfShape != BlockType.EMPTY)
+                {
+                    Add_BlockToBoard(rowIndex, colIndex, typeOfShape);
+                    addedBlock.Add(grid[rowIndex, colIndex]);
+                    Debug.Log("ADD COMPLETED");
+                }
+            }
+        }
+        MissionManager.Instance.CheckMission(TargetType.PutBlockShape, shape.GetComponent<BlockShape>().Shape);
+    }
+
+    #endregion
+    //-------------------------------------------------------------------------------------------------------
+
+    #region CHECK POSITION
+
+    public bool CheckValidPosition_ShapePosition(int startX, int startY, GameObject shape)
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                int rowIndex = startX + x;
+                int colIndex = startY + y;
+                if (shape.GetComponent<BlockShape>().blocks[x, y].GetComponent<Block>().type != BlockType.EMPTY)
+                {
+                    if (!Check_IsValidBlock(rowIndex, colIndex))
+                    {
+                        //Debug.Log( rowIndex +  "," + colIndex + ":INVALID POSITION");
+                        return false;
+                    }
+                }
+
+            }
+        }
+        return true;
+    }
+
+
+    public bool Check_IsValidBlock(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= gridWidth || y >= gridHeight)
+        {
+            return false;
+        }
+
+        BlockType typeOfGrid = grid[x, y].GetComponent<Block>().type;
+        if (typeOfGrid != BlockType.BLOCK_BOARD)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public bool Check_IsValidBlock(Vector2Int pos)
+    {
+        if (pos.x < 0 || pos.y < 0 || pos.x >= gridWidth || pos.y >= gridHeight)
+        {
+            return false;
+        }
+
+        if (grid[pos.x, pos.y].GetComponent<Block>().type != BlockType.BLOCK_BOARD)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    #endregion
+    //-------------------------------------------------------------------------------------------------------
+
+    #region GAME OVER
+
+    public bool Check_IsEmptyShape(GameObject shape)
+    {
+        if (shape.GetComponent<BlockShape>().Block == BlockType.EMPTY)
+            return true;
+        return false;
+    }
+
+
+    public bool Check_IsStillPutShape(GameObject shape)
+    {
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (grid[x, y].GetComponent<Block>().type == BlockType.BLOCK_BOARD)
+                {
+                    if (CheckValidPosition_ShapePosition(x, y, shape))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public bool Check_IsGameOver()
+    {
+        int numberOfShapeEmpty = 0;
+
+        for (int shapeIndex = 0; shapeIndex < listShapeHolder.Count; shapeIndex++)
+        {
+            GameObject shape = listShapeHolder[shapeIndex];
+            if (!Check_IsEmptyShape(shape))
+            {
+                if (Check_IsStillPutShape(shape))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                numberOfShapeEmpty++;
+            }
+
+        }
+
+        if (numberOfShapeEmpty == listShapeHolder.Count)
+            return false;
+        return true;
+    }
+
+    #endregion
+
+    #region RESET BOARD
+
+    public void Reset_Board()
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                grid[x, y].GetComponent<Block>().ChangeType(BlockType.BLOCK_BOARD);
+            }
+        }
+    }
+    #endregion
+
+    #region ITEM EVENTS
+
+    public void Break_BloctAtIndex(int x,int y)
+    {
+        grid[x, y].GetComponent<Block>().ChangeType(BlockType.BLOCK_BOARD);
+    }
+
+    public void Clean_CleanAtIndex(int indexClean, TypeOfClean typeOfClean)
+    {
+        switch (typeOfClean)
+        {
+            case TypeOfClean.CLEAN_COLUM:
+                Delete_ColumnAtindex(indexClean);
+                break;
+
+            case TypeOfClean.CLEAN_ROW:
+                Delete_RowAtIndex(indexClean);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void Reset_PrivouseTimePlay()
+    {
+
+    }
+
+    #endregion
+
+    public void spreadGrass(float TimeDelay = 0.03f)
+    {
+        System.Random random = new System.Random();
+        bool isSpreaded = false;
+        List<BlockImpedient> lGrass = new List<BlockImpedient>();
+        lGrass.AddRange(MissionManager.Instance.lGrass);
+        while (!isSpreaded && lGrass.Count > 0)
+        {
+            int choose = random.Next(0, lGrass.Count);
+            int[] pos = lGrass[choose].PosInMap;
+            List<int[]> lSpreadGrass = new List<int[]>();
+            lSpreadGrass.Add(new int[] { pos[0] + 1, pos[1] });
+            lSpreadGrass.Add(new int[] { pos[0] - 1, pos[1] });
+            lSpreadGrass.Add(new int[] { pos[0], pos[1] + 1 });
+            lSpreadGrass.Add(new int[] { pos[0], pos[1] - 1 });
+            while (!isSpreaded && lSpreadGrass.Count > 0)
+            {
+                int index = random.Next(0, lSpreadGrass.Count);
+                isSpreaded = CanSpreading(lSpreadGrass[index]);
+                lSpreadGrass.RemoveAt(index);
+            }
+            lGrass.RemoveAt(choose);
+        }
+    }
+    private bool CanSpreading(int[] pos)
+    {
+        try
+        {
+            if (grid[pos[0], pos[1]].GetComponent<Block>().type == BlockType.BLOCK_GREEN
+                || grid[pos[0], pos[1]].GetComponent<Block>().type == BlockType.BLOCK_ORANGE
+                || grid[pos[0], pos[1]].GetComponent<Block>().type == BlockType.BLOCK_PURPLE
+                || grid[pos[0], pos[1]].GetComponent<Block>().type == BlockType.BLOCK_RED
+                || grid[pos[0], pos[1]].GetComponent<Block>().type == BlockType.BLOCK_YELLOW
+                && pos[0] > 0 && pos[0] < gridHeight && pos[1] > 0 && pos[1] < gridWidth)
+            {
+                grid[pos[0], pos[1]].GetComponent<Block>().ChangeType(BlockType.BLOCK_GRASS);
+                MissionManager.Instance.lGrass.Add(new BlockImpedient(BlockType.BLOCK_GRASS, pos));
+                MissionManager.Instance.CheckMission(TargetType.DestroyImpedient, BlockType.BLOCK_GRASS, -1);
+                return true;
+            }
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            throw;
+        }
+        return false;
+    }
+}

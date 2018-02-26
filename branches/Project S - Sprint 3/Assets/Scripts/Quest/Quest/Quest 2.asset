@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b783e496d34817d4198914ba437f66d4, type: 3}
+  m_Name: Quest 2
+  m_EditorClassIdentifier: 
+  STT: 2
+  QuestSpriteIcon: {fileID: 21300022, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  Description: Get My Heaty
+  amountKey: 2
+  nextQuest: 01000000
+  listType:
+  - {fileID: 21300002, guid: c3a4881cd537dc24db9f739d7a915e9e, type: 3}
+  - {fileID: 21300006, guid: c3a4881cd537dc24db9f739d7a915e9e, type: 3}
+  - {fileID: 21300000, guid: fd75accd0da62624a919ed60f34ff7ec, type: 3}
+  timeWork: 25

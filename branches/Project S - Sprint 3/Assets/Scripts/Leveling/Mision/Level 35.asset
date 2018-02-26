@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430329e37f9f0484f8fb3eba752d09a4, type: 3}
+  m_Name: Level 35
+  m_EditorClassIdentifier: 
+  level: 35
+  targets:
+  - targetType: 4
+    amount: 10
+    blockType: 0
+    lineType: 0
+    shapeType: 1
+    coomboX: 0
+  - targetType: 4
+    amount: 8
+    blockType: 0
+    lineType: 0
+    shapeType: 6
+    coomboX: 0
+  lBlockImpedient:
+  - blockType: 8
+    posInMap: 0200000002000000
+  - blockType: 8
+    posInMap: 0300000003000000
+  - blockType: 8
+    posInMap: 0600000006000000
+  - blockType: 8
+    posInMap: 0700000007000000
+  difficult: 3
+  step: 0
+  time: 0

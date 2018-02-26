@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d1b7be3680c294086044cb967cf2eb, type: 3}
+  m_Name: Week1
+  m_EditorClassIdentifier: Assembly-CSharp::WeeklyBonusData
+  weekNumber: 1
+  weekBonus:
+  - dayNumber: 1
+    count: 300
+    title: +300
+    type: 1
+    bonusSprite: {fileID: 21300024, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 2
+    count: 400
+    title: +400
+    type: 1
+    bonusSprite: {fileID: 21300024, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 3
+    count: 500
+    title: +500
+    type: 1
+    bonusSprite: {fileID: 21300024, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 4
+    count: 1
+    title: +1
+    type: 3
+    bonusSprite: {fileID: 21300012, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 5
+    count: 1
+    title: +1
+    type: 4
+    bonusSprite: {fileID: 21300014, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 6
+    count: 1
+    title: +1
+    type: 5
+    bonusSprite: {fileID: 21300016, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
+  - dayNumber: 7
+    count: 15
+    title: +15 minutes
+    type: 0
+    bonusSprite: {fileID: 21300022, guid: d0c226bda218f9f42b4af949dd173261, type: 3}
